@@ -8,10 +8,20 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { CustomerlistingComponent } from './components/customerlisting/customerlisting.component';
+import { AssociatelistingComponent } from './components/associatelisting/associatelisting.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegisterComponent,
+    LoginComponent,
+    HomeComponent,
+    CustomerlistingComponent,
+    AssociatelistingComponent
   ],
   imports: [
     BrowserModule,
