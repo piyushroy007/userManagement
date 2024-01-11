@@ -6,6 +6,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Install Angular Material
 ng add @angular/material@16.2.12
 
+## Install NGRX Store
+ng add @ngrx/store@16.2.0
+
+## Install NGRX Entity
+ng add @ngrx/entity@16.2.0
+
+## Install NGRX Effects
+ng add @ngrx/effects@16.2.0
+
+## Install NGRX Router Store
+ng add @ngrx/router-store@16.2.0
+
+## Install NGRX Store Devtools
+ng add @ngrx/store-devtools@16.2.0
 
 ## Development server
 
