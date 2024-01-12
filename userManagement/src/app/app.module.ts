@@ -13,7 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CustomerlistingComponent } from './components/customerlisting/customerlisting.component';
 import { AssociatelistingComponent } from './components/associatelisting/associatelisting.component';
-
+import { MaterialModule } from './Material.module';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,9 @@ import { AssociatelistingComponent } from './components/associatelisting/associa
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

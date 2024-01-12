@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Users } from 'src/app/store/Model/user.model';
 
 @Component({
   selector: 'app-register',
@@ -21,4 +22,38 @@ export class RegisterComponent {
     phone: this.builder.control('', Validators.required),
     gender: this.builder.control('male')
   })
+
+  Proceedregister() {
+    if (this.registerform.valid) {
+      if (this.registerform.value.password === this.registerform.value.confirmpassword) {
+        const _userobj: Users = {
+          username: this.registerform.value.username as string,
+          password: this.registerform.value.password as string,
+          name: this.registerform.value.name as string,
+          email: this.registerform.value.email as string,
+          phone: this.registerform.value.phone as string,
+          gender: this.registerform.value.gender as string,
+          role: 'user',
+          status: true
+        }
+        // this.store.dispatch(beginRegister({ userdata: _userobj }))
+
+      } else {
+        // this.store.dispatch(showalert({ message: 'Password mismatch', resulttype: 'fail' }))
+      }
+    }
+  }
+
+  FunctionDuplicateUser() {
+    const username = this.registerform.value.username as string;
+    if (username != '') {
+      // this.store.dispatch(duplicateUser({ username: username }));
+      // this.store.select(isDuplicateUser).subscribe(item => {
+      //   const isexist = item;
+      //   if (isexist) {
+      //     this.registerform.controls['username'].reset();
+      //   }
+      // });
+    }
+  }
 }
