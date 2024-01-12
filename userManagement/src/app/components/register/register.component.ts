@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Users } from 'src/app/store/Model/user.model';
+import { beginRegister } from 'src/app/store/User/User.action';
+import { showalert } from 'src/app/store/common/App.Actions';
 
 @Component({
   selector: 'app-register',
@@ -36,10 +38,11 @@ export class RegisterComponent {
           role: 'user',
           status: true
         }
-        // this.store.dispatch(beginRegister({ userdata: _userobj }))
+        this.store.dispatch(beginRegister({ userdata: _userobj }))
 
       } else {
-        // this.store.dispatch(showalert({ message: 'Password mismatch', resulttype: 'fail' }))
+        console.log("Password mismatch");
+        this.store.dispatch(showalert({ message: 'Password mismatch', resulttype: 'fail' }))
       }
     }
   }

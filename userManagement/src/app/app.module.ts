@@ -17,6 +17,10 @@ import { MaterialModule } from './Material.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { UserReducer } from './store/User/User.Reducer';
 import { UserEffect } from './store/User/User.effects';
+import { HttpClientModule } from '@angular/common/http';
+import { AppEffects } from './store/common/App.Effects';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,8 +37,9 @@ import { UserEffect } from './store/User/User.effects';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     StoreModule.forRoot({user:UserReducer}),
-    EffectsModule.forRoot([UserEffect]),
+    EffectsModule.forRoot([AppEffects,UserEffect]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],

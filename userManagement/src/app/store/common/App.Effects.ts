@@ -14,6 +14,7 @@ export class AppEffects {
         this.$action.pipe(
             ofType(showalert),
             exhaustMap((action) => {
+                console.log("Password mismatch Password mismatch");
                 return this.Shownackbaralert(action.message, action.resulttype).afterDismissed().pipe(
                     map(() => {
                         return emptyaction();
