@@ -15,6 +15,8 @@ import { CustomerlistingComponent } from './components/customerlisting/customerl
 import { AssociatelistingComponent } from './components/associatelisting/associatelisting.component';
 import { MaterialModule } from './Material.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { UserReducer } from './store/User/User.Reducer';
+import { UserEffect } from './store/User/User.effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,8 +33,8 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({user:UserReducer}),
+    EffectsModule.forRoot([UserEffect]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
