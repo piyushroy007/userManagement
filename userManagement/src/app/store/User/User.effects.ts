@@ -58,7 +58,7 @@ export class UserEffect {
                             const _userdata = data[0];
                             console.log(data);
                             if (_userdata.status === true) {
-                                // this.service.SetUserToLoaclStorage(_userdata);
+                                this.service.SetUserToLoaclStorage(_userdata);
                                 this.route.navigate([''])
                                 return showalert({ message: 'Login success.', resulttype: 'pass' })
                             } else {

@@ -41,9 +41,10 @@ export class UserService {
   //   return this.http.get<Roles[]>('http://localhost:3000/role');
   // }
 
-  // SetUserToLoaclStorage(userdata: Userinfo) {
-  //   localStorage.setItem('userdata', JSON.stringify(userdata))
-  // }
+  SetUserToLoaclStorage(userdata: Userinfo) {
+    console.log("saving to local storage");
+    localStorage.setItem('userdata', JSON.stringify(userdata))
+  }
 
   // UpdateUser(userid: number, role: string) {
   //   return this.http.get<Users>(this.APIBaseUrl+'/'+userid).pipe(
@@ -54,22 +55,22 @@ export class UserService {
   //   )
   // }
 
-  // Getuserdatafromstorage() {
-  //   let _obj: Userinfo = {
-  //     id: 0,
-  //     username: '',
-  //     email: '',
-  //     name: '',
-  //     role: '',
-  //     status: false
-  //   }
-  //   if (localStorage.getItem('userdata') != null) {
-  //     let jsonstring = localStorage.getItem('userdata') as string;
-  //     _obj = JSON.parse(jsonstring);
-  //     return _obj;
-  //   } else {
-  //     return _obj;
-  //   }
+  Getuserdatafromstorage() {
+    let _obj: Userinfo = {
+      id: 0,
+      username: '',
+      email: '',
+      name: '',
+      role: '',
+      status: false
+    }
+    if (localStorage.getItem('userdata') != null) {
+      let jsonstring = localStorage.getItem('userdata') as string;
+      _obj = JSON.parse(jsonstring);
+      return _obj;
+    } else {
+      return _obj;
+    }
 
-  // }
+  }
 }

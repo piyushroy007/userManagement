@@ -5,11 +5,12 @@ import { HomeComponent } from './components/home/home.component';
 import { AssociatelistingComponent } from './components/associatelisting/associatelisting.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { loginGuard } from './gaurd/login.guard';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
-  {path:'associate',component:AssociatelistingComponent},
-  {path:'customer',component:CustomerlistingComponent},
+  {path:'',component:HomeComponent,canActivate:[loginGuard]},
+  {path:'associate',component:AssociatelistingComponent,canActivate:[loginGuard]},
+  {path:'customer',component:CustomerlistingComponent,canActivate:[loginGuard]},
   {path:'register',component:RegisterComponent},
   {path:'login',component:LoginComponent},
 ];
