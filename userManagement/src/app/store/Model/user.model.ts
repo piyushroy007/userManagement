@@ -11,6 +11,25 @@ export interface Users{
     status:boolean
 }
 
+export interface Usercred{
+    username:string,
+    password:string
+}
+
+export interface Userinfo{
+    id:number,
+    username:string,
+    name:string,
+    email:string,
+    role:string,
+    status:boolean
+}
+
+export interface Roles{
+    code:string,
+    name:string
+}
+
 export interface UserModel extends EntityState<Users>{
-    
+    isDuplicate:boolean
  }

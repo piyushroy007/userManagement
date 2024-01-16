@@ -3,8 +3,9 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from "src/app/service/user.service";
 import { exhaustMap, map, catchError, of, switchMap } from 'rxjs'
 import { Router } from "@angular/router";
-import { beginRegister } from "./User.action";
+import { beginLogin, beginRegister, duplicateUser, duplicateUserSuccess } from "./User.action";
 import { showalert } from "../common/App.Actions";
+import { Userinfo } from "../Model/user.model";
 
 @Injectable()
 export class UserEffect {
@@ -27,54 +28,53 @@ export class UserEffect {
         )
     )
 
-    // _duplicateuser = createEffect(() =>
-    //     this.action$.pipe(
-    //         ofType(duplicateUser),
-    //         switchMap((action) => {
-    //             return this.service.Duplicateusername(action.username).pipe(
-    //                 switchMap((data) => {
-    //                     if (data.length > 0) {
-    //                         return of(duplicateUserSuccess({ isduplicate: true }),
-    //                             showalert({ message: 'Username already exist.', resulttype: 'fail' }))
-    //                     } else {
-    //                         return of(duplicateUserSuccess({ isduplicate: false }))
-    //                     }
+    _duplicateuser = createEffect(() =>
+        this.action$.pipe(
+            ofType(duplicateUser),
+            switchMap((action) => {
+                return this.service.Duplicateusername(action.username).pipe(
+                    switchMap((data) => {
+                        if (data.length > 0) {
+                            return of(duplicateUserSuccess({ isduplicate: true }),
+                                showalert({ message: 'Username already exist.', resulttype: 'fail' }))
+                        } else {
+                            return of(duplicateUserSuccess({ isduplicate: false }))
+                        }
 
-    //                 }),
-    //                 catchError((_error) => of(showalert({ message: 'Registerion Failed due to :.' + _error.message, resulttype: 'fail' })))
-    //             )
-    //         })
-    //     )
-    // )
+                    }),
+                    catchError((_error) => of(showalert({ message: 'Registerion Failed due to :.' + _error.message, resulttype: 'fail' })))
+                )
+            })
+        )
+    )
 
-    // _userlogin = createEffect(() =>
-    //     this.action$.pipe(
-    //         ofType(beginLogin),
-    //         switchMap((action) => {
-    //             return this.service.UserLogin(action.usercred).pipe(
-    //                 switchMap((data: Userinfo[]) => {
-    //                     if (data.length > 0) {
-    //                         const _userdata = data[0];
-    //                         console.log(data);
-    //                         if (_userdata.status === true) {
-    //                             this.service.SetUserToLoaclStorage(_userdata);
-    //                             this.route.navigate([''])
-    //                             return of(fetchmenu({ userrole: _userdata.role }),
-    //                                 showalert({ message: 'Login success.', resulttype: 'pass' }))
-    //                         } else {
-    //                             return of(showalert({ message: 'InActive User.', resulttype: 'fail' }))
-    //                         }
-    //                     } else {
-    //                         return of(showalert({ message: 'Login Failed: Invalid credentials.', resulttype: 'fail' }))
-    //                     }
+    _userlogin = createEffect(() =>
+        this.action$.pipe(
+            ofType(beginLogin),
+            switchMap((action) => {
+                return this.service.UserLogin(action.usercred).pipe(
+                    map((data) => {
+                        if (data.length > 0) {
+                            const _userdata = data[0];
+                            console.log(data);
+                            if (_userdata.status === true) {
+                                // this.service.SetUserToLoaclStorage(_userdata);
+                                this.route.navigate([''])
+                                return showalert({ message: 'Login success.', resulttype: 'pass' })
+                            } else {
+                                return showalert({ message: 'InActive User.', resulttype: 'fail' })
+                            }
+                        } else {
+                            return showalert({ message: 'Login Failed: Invalid credentials.', resulttype: 'fail' })
+                        }
 
 
-    //                 }),
-    //                 catchError((_error) => of(showalert({ message: 'Login Failed due to :.' + _error.message, resulttype: 'fail' })))
-    //             )
-    //         })
-    //     )
-    // )
+                    }),
+                    catchError((_error) => of(showalert({ message: 'Login Failed due to :.' + _error.message, resulttype: 'fail' })))
+                )
+            })
+        )
+    )
 
     // _loadmenubyrole = createEffect(() =>
     //     this.action$.pipe(

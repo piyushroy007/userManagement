@@ -116,6 +116,17 @@
       "role": "user",
       "status": true,
       "id": 5
+    },
+    {
+      "username": "admin1",
+      "password": "admin11",
+      "name": "admin 11",
+      "email": "admin11@gmail.com",
+      "phone": "789456789",
+      "gender": "female",
+      "role": "user",
+      "status": true,
+      "id": 6
     }
   ],
   "role": [

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs'
-import { Users } from '../store/Model/user.model';
+import { Usercred, Userinfo, Users } from '../store/Model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +18,13 @@ export class UserService {
     return this.http.post(this.APIBaseUrl, userdata);
   }
 
-  // UserLogin(userdata: Usercred): Observable<Userinfo[]> {
-  //   return this.http.get<Userinfo[]>(this.APIBaseUrl + '?username=' + userdata.username + '&password=' + userdata.password);
-  // }
+  UserLogin(userdata: Usercred): Observable<Userinfo[]> {
+    return this.http.get<Userinfo[]>(this.APIBaseUrl + '?username=' + userdata.username + '&password=' + userdata.password);
+  }
 
-  // Duplicateusername(username: string): Observable<Userinfo[]> {
-  //   return this.http.get<Userinfo[]>(this.APIBaseUrl + '?username=' + username);
-  // }
+  Duplicateusername(username: string): Observable<Userinfo[]> {
+    return this.http.get<Userinfo[]>(this.APIBaseUrl + '?username=' + username);
+  }
 
   // GetMenubyRole(userrole: string): Observable<Roleaccess[]> {
   //   return this.http.get<Roleaccess[]>('http://localhost:3000/roleaccess?role=' + userrole);

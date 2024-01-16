@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Users } from 'src/app/store/Model/user.model';
-import { beginRegister } from 'src/app/store/User/User.action';
+import { isDuplicateUser } from 'src/app/store/User/User.Selector';
+import { beginRegister, duplicateUser } from 'src/app/store/User/User.action';
 import { showalert } from 'src/app/store/common/App.Actions';
 
 @Component({
@@ -50,13 +51,13 @@ export class RegisterComponent {
   FunctionDuplicateUser() {
     const username = this.registerform.value.username as string;
     if (username != '') {
-      // this.store.dispatch(duplicateUser({ username: username }));
-      // this.store.select(isDuplicateUser).subscribe(item => {
-      //   const isexist = item;
-      //   if (isexist) {
-      //     this.registerform.controls['username'].reset();
-      //   }
-      // });
+      this.store.dispatch(duplicateUser({ username: username }));
+      this.store.select(isDuplicateUser).subscribe(item => {
+        const isexist = item;
+        if (isexist) {
+          this.registerform.controls['username'].reset();
+        }
+      });
     }
   }
 }
