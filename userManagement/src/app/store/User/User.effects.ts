@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from "src/app/service/user.service";
 import { exhaustMap, map, catchError, of, switchMap } from 'rxjs'
 import { Router } from "@angular/router";
-import { beginLogin, beginRegister, duplicateUser, duplicateUserSuccess } from "./User.action";
+import { beginLogin, beginRegister, duplicateUser, duplicateUserSuccess, fetchmenu, fetchmenusuccess } from "./User.action";
 import { showalert } from "../common/App.Actions";
 import { Userinfo } from "../Model/user.model";
 
@@ -53,19 +53,20 @@ export class UserEffect {
             ofType(beginLogin),
             switchMap((action) => {
                 return this.service.UserLogin(action.usercred).pipe(
-                    map((data) => {
+                    switchMap((data: Userinfo[]) => {
                         if (data.length > 0) {
                             const _userdata = data[0];
                             console.log(data);
                             if (_userdata.status === true) {
                                 this.service.SetUserToLoaclStorage(_userdata);
                                 this.route.navigate([''])
-                                return showalert({ message: 'Login success.', resulttype: 'pass' })
+                                return of(fetchmenu({ userrole: _userdata.role }),
+                                    showalert({ message: 'Login success.', resulttype: 'pass' }))
                             } else {
-                                return showalert({ message: 'InActive User.', resulttype: 'fail' })
+                                return of(showalert({ message: 'InActive User.', resulttype: 'fail' }))
                             }
                         } else {
-                            return showalert({ message: 'Login Failed: Invalid credentials.', resulttype: 'fail' })
+                            return of(showalert({ message: 'Login Failed: Invalid credentials.', resulttype: 'fail' }))
                         }
 
 
@@ -76,19 +77,19 @@ export class UserEffect {
         )
     )
 
-    // _loadmenubyrole = createEffect(() =>
-    //     this.action$.pipe(
-    //         ofType(fetchmenu),
-    //         exhaustMap((action) => {
-    //             return this.service.GetMenubyRole(action.userrole).pipe(
-    //                 map((data) => {
-    //                     return fetchmenusuccess({ menulist: data })
-    //                 }),
-    //                 catchError((_error) => of(showalert({ message: 'Failed to fetch mmenu list', resulttype: 'fail' })))
-    //             )
-    //         })
-    //     )
-    // )
+    _loadmenubyrole = createEffect(() =>
+        this.action$.pipe(
+            ofType(fetchmenu),
+            exhaustMap((action) => {
+                return this.service.GetMenubyRole(action.userrole).pipe(
+                    map((data) => {
+                        return fetchmenusuccess({ menulist: data })
+                    }),
+                    catchError((_error) => of(showalert({ message: 'Failed to fetch mmenu list', resulttype: 'fail' })))
+                )
+            })
+        )
+    )
 
     // _getallusers = createEffect(() =>
     //     this.action$.pipe(

@@ -30,6 +30,17 @@ export interface Roles{
     name:string
 }
 
+export interface Menus{
+    code:string,
+    name:string
+}
+
+export interface Roleaccess{
+    role:string,
+    menu:string
+}
+
 export interface UserModel extends EntityState<Users>{
-    isDuplicate:boolean
+    isDuplicate:boolean,
+    menulist:Roleaccess[],
  }

@@ -19,6 +19,8 @@ import { UserReducer } from './store/User/User.Reducer';
 import { UserEffect } from './store/User/User.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { AppEffects } from './store/common/App.Effects';
+import { MenubarComponent } from './components/menubar/menubar.component';
+import { UserlistComponent } from './components/userlist/userlist.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { AppEffects } from './store/common/App.Effects';
     LoginComponent,
     HomeComponent,
     CustomerlistingComponent,
-    AssociatelistingComponent
+    AssociatelistingComponent,
+    MenubarComponent,
+    UserlistComponent
   ],
   imports: [
     BrowserModule,

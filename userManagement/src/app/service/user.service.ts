@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs'
-import { Usercred, Userinfo, Users } from '../store/Model/user.model';
+import { Roleaccess, Usercred, Userinfo, Users } from '../store/Model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +26,12 @@ export class UserService {
     return this.http.get<Userinfo[]>(this.APIBaseUrl + '?username=' + username);
   }
 
-  // GetMenubyRole(userrole: string): Observable<Roleaccess[]> {
-  //   return this.http.get<Roleaccess[]>('http://localhost:3000/roleaccess?role=' + userrole);
-  // }
-  // HaveMenuAccess(userrole: string, menuname: string): Observable<Roleaccess[]> {
-  //   return this.http.get<Roleaccess[]>('http://localhost:3000/roleaccess?role=' + userrole + '&menu=' + menuname);
-  // }
+  GetMenubyRole(userrole: string): Observable<Roleaccess[]> {
+    return this.http.get<Roleaccess[]>('http://localhost:3000/roleaccess?role=' + userrole);
+  }
+  HaveMenuAccess(userrole: string, menuname: string): Observable<Roleaccess[]> {
+    return this.http.get<Roleaccess[]>('http://localhost:3000/roleaccess?role=' + userrole + '&menu=' + menuname);
+  }
 
   // GetAllUsers(): Observable<Users[]> {
   //   return this.http.get<Users[]>(this.APIBaseUrl);

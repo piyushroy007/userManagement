@@ -8,7 +8,7 @@ const getUserState = createFeatureSelector<UserModel>('user');
 
 export const isDuplicateUser = createSelector(getUserState, (state) => state.isDuplicate);
 
-// export const getmenubyrole = createSelector(getUserState, (state) => state.menulist);
+export const getmenubyrole = createSelector(getUserState, (state) => state.menulist);
 
 // export const getuserlist = createSelector(getUserState, userselector.selectAll)
 
