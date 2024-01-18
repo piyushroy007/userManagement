@@ -43,4 +43,6 @@ export interface Roleaccess{
 export interface UserModel extends EntityState<Users>{
     isDuplicate:boolean,
     menulist:Roleaccess[],
+    roles:Roles[],
+    userinfo:Userinfo
  }

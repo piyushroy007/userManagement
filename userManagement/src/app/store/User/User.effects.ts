@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from "src/app/service/user.service";
 import { exhaustMap, map, catchError, of, switchMap } from 'rxjs'
 import { Router } from "@angular/router";
-import { beginLogin, beginRegister, duplicateUser, duplicateUserSuccess, fetchmenu, fetchmenusuccess } from "./User.action";
+import { beginLogin, beginRegister, duplicateUser, duplicateUserSuccess, fetchmenu, fetchmenusuccess, getroles, getrolesuccess, getuserbycode, getuserbycodesuccess, getusers, getuserssuccess } from "./User.action";
 import { showalert } from "../common/App.Actions";
 import { Userinfo } from "../Model/user.model";
 
@@ -91,53 +91,53 @@ export class UserEffect {
         )
     )
 
-    // _getallusers = createEffect(() =>
-    //     this.action$.pipe(
-    //         ofType(getusers),
-    //         exhaustMap((action) => {
-    //             return this.service.GetAllUsers().pipe(
-    //                 map((data) => {
-    //                     return getuserssuccess({ userlist: data })
-    //                 }),
-    //                 catchError((_error) => of(showalert({ message: 'Failed to fetch user list', resulttype: 'fail' })))
-    //             )
-    //         })
-    //     )
-    // )
+    _getallusers = createEffect(() =>
+        this.action$.pipe(
+            ofType(getusers),
+            exhaustMap((action) => {
+                return this.service.GetAllUsers().pipe(
+                    map((data) => {
+                        return getuserssuccess({ userlist: data })
+                    }),
+                    catchError((_error) => of(showalert({ message: 'Failed to fetch user list', resulttype: 'fail' })))
+                )
+            })
+        )
+    )
 
-    // _getallRoles = createEffect(() =>
-    //     this.action$.pipe(
-    //         ofType(getroles),
-    //         exhaustMap((action) => {
-    //             return this.service.GetAllRoles().pipe(
-    //                 map((data) => {
-    //                     return getrolesuccess({ rolelist: data })
-    //                 }),
-    //                 catchError((_error) => of(showalert({ message: 'Failed to fetch role list', resulttype: 'fail' })))
-    //             )
-    //         })
-    //     )
-    // )
+    _getallRoles = createEffect(() =>
+        this.action$.pipe(
+            ofType(getroles),
+            exhaustMap((action) => {
+                return this.service.GetAllRoles().pipe(
+                    map((data) => {
+                        return getrolesuccess({ rolelist: data })
+                    }),
+                    catchError((_error) => of(showalert({ message: 'Failed to fetch role list', resulttype: 'fail' })))
+                )
+            })
+        )
+    )
 
 
-    // _getuserbycode = createEffect(() =>
-    //     this.action$.pipe(
-    //         ofType(getuserbycode),
-    //         switchMap((action) => {
-    //             return this.service.Duplicateusername(action.username).pipe(
-    //                 switchMap((data) => {
-    //                     if (data.length > 0) {
-    //                         return of(getuserbycodesuccess({ userinfo: data[0] }))
-    //                     } else {
-    //                         return of(duplicateUserSuccess({ isduplicate: false }))
-    //                     }
+    _getuserbycode = createEffect(() =>
+        this.action$.pipe(
+            ofType(getuserbycode),
+            switchMap((action) => {
+                return this.service.Duplicateusername(action.username).pipe(
+                    switchMap((data) => {
+                        if (data.length > 0) {
+                            return of(getuserbycodesuccess({ userinfo: data[0] }))
+                        } else {
+                            return of(duplicateUserSuccess({ isduplicate: false }))
+                        }
 
-    //                 }),
-    //                 catchError((_error) => of(showalert({ message: 'get userbycode Failed due to :.' + _error.message, resulttype: 'fail' })))
-    //             )
-    //         })
-    //     )
-    // )
+                    }),
+                    catchError((_error) => of(showalert({ message: 'get userbycode Failed due to :.' + _error.message, resulttype: 'fail' })))
+                )
+            })
+        )
+    )
 
     // _assignrole = createEffect(() =>
     //     this.action$.pipe(

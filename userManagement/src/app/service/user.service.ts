@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs'
-import { Roleaccess, Usercred, Userinfo, Users } from '../store/Model/user.model';
+import { Roleaccess, Roles, Usercred, Userinfo, Users } from '../store/Model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +33,13 @@ export class UserService {
     return this.http.get<Roleaccess[]>('http://localhost:3000/roleaccess?role=' + userrole + '&menu=' + menuname);
   }
 
-  // GetAllUsers(): Observable<Users[]> {
-  //   return this.http.get<Users[]>(this.APIBaseUrl);
-  // }
+  GetAllUsers(): Observable<Users[]> {
+    return this.http.get<Users[]>(this.APIBaseUrl);
+  }
 
-  // GetAllRoles(): Observable<Roles[]> {
-  //   return this.http.get<Roles[]>('http://localhost:3000/role');
-  // }
+  GetAllRoles(): Observable<Roles[]> {
+    return this.http.get<Roles[]>('http://localhost:3000/role');
+  }
 
   SetUserToLoaclStorage(userdata: Userinfo) {
     console.log("saving to local storage");

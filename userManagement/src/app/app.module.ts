@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppEffects } from './store/common/App.Effects';
 import { MenubarComponent } from './components/menubar/menubar.component';
 import { UserlistComponent } from './components/userlist/userlist.component';
+import { DialogPopComponent } from './components/dialog-pop/dialog-pop.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { UserlistComponent } from './components/userlist/userlist.component';
     CustomerlistingComponent,
     AssociatelistingComponent,
     MenubarComponent,
-    UserlistComponent
+    UserlistComponent,
+    DialogPopComponent
   ],
   imports: [
     BrowserModule,

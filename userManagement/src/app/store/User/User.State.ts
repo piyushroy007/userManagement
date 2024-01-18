@@ -6,6 +6,15 @@ export const UserAdapter = createEntityAdapter<Users>();
 export const UserState: UserModel = UserAdapter.getInitialState(
     {
         isDuplicate:false,
-        menulist:[]
+        menulist:[],
+        roles:[],
+        userinfo:{
+            id:0,
+            username: '',
+            email: '',
+            name: '',
+            role: '',
+            status: false
+        }
     }
 );
