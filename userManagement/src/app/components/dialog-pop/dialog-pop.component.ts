@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Roles, Userinfo } from 'src/app/store/Model/user.model';
 import { getUserbycode, getallroles } from 'src/app/store/User/User.Selector';
-import { getroles, getuserbycode } from 'src/app/store/User/User.action';
+import { getroles, getuserbycode, updateuserrole } from 'src/app/store/User/User.action';
 
 @Component({
   selector: 'app-dialog-pop',
@@ -49,11 +49,11 @@ export class DialogPopComponent {
   });
 
   Saveuserrole() {
-    // if (this.roleform.valid) {
-    //    this.store.dispatch(updateuserrole({userrole:this.roleform.value.role as string,
-    //     userid:this.roleform.value.id as number}))
-    //     this.closepopup();
-    // }
+    if (this.roleform.valid) {
+       this.store.dispatch(updateuserrole({userrole:this.roleform.value.role as string,
+        userid:this.roleform.value.id as number}))
+        this.closepopup();
+    }
   }
 
   closepopup() {

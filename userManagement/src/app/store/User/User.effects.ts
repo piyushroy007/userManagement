@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from "src/app/service/user.service";
 import { exhaustMap, map, catchError, of, switchMap } from 'rxjs'
 import { Router } from "@angular/router";
-import { beginLogin, beginRegister, duplicateUser, duplicateUserSuccess, fetchmenu, fetchmenusuccess, getroles, getrolesuccess, getuserbycode, getuserbycodesuccess, getusers, getuserssuccess } from "./User.action";
+import { beginLogin, beginRegister, duplicateUser, duplicateUserSuccess, fetchmenu, fetchmenusuccess, getroles, getrolesuccess, getuserbycode, getuserbycodesuccess, getusers, getuserssuccess, updateuserrole } from "./User.action";
 import { showalert } from "../common/App.Actions";
 import { Userinfo } from "../Model/user.model";
 
@@ -139,18 +139,18 @@ export class UserEffect {
         )
     )
 
-    // _assignrole = createEffect(() =>
-    //     this.action$.pipe(
-    //         ofType(updateuserrole),
-    //         switchMap((action) => {
-    //             return this.service.UpdateUser(action.userid,action.userrole).pipe(
-    //                 switchMap(() => {
-    //                     return of(getusers(),showalert({ message: 'Updated successfully',resulttype:'pass' }))
-    //                 }),
-    //                 catchError((_error) => of(showalert({ message: 'get userbycode Failed due to :.' + _error.message, resulttype: 'fail' })))
-    //             )
-    //         })
-    //     )
-    // )
+    _assignrole = createEffect(() =>
+        this.action$.pipe(
+            ofType(updateuserrole),
+            switchMap((action) => {
+                return this.service.UpdateUser(action.userid,action.userrole).pipe(
+                    switchMap(() => {
+                        return of(getusers(),showalert({ message: 'Updated successfully',resulttype:'pass' }))
+                    }),
+                    catchError((_error) => of(showalert({ message: 'get userbycode Failed due to :.' + _error.message, resulttype: 'fail' })))
+                )
+            })
+        )
+    )
 
 }

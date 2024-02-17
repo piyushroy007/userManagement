@@ -46,14 +46,14 @@ export class UserService {
     localStorage.setItem('userdata', JSON.stringify(userdata))
   }
 
-  // UpdateUser(userid: number, role: string) {
-  //   return this.http.get<Users>(this.APIBaseUrl+'/'+userid).pipe(
-  //     switchMap((data)=>{
-  //           data.role=role;
-  //          return this.http.put(this.APIBaseUrl+'/'+userid,data)
-  //     })
-  //   )
-  // }
+  UpdateUser(userid: number, role: string) {
+    return this.http.get<Users>(this.APIBaseUrl+'/'+userid).pipe(
+      switchMap((data)=>{
+            data.role=role;
+           return this.http.put(this.APIBaseUrl+'/'+userid,data)
+      })
+    )
+  }
 
   Getuserdatafromstorage() {
     let _obj: Userinfo = {
